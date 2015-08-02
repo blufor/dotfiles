@@ -1,24 +1,22 @@
 #!/bin/bash
 
-
 SRC=$PWD
-
-
 set -x
 
-mkdir -p ${HOME}/bin
 mkdir -p ${HOME}/.ssh
 mkdir -p ${HOME}/.gnupg
 mkdir -p ${HOME}/.config/autostart
 
 cd ${HOME}
 
-rm -rf .bashrc .profile .bash_profile .bash_logout .conkyrc .Xmodmap .devilspie bin
+rm -rf .bashrc .profile .bash_profile .bash_logout .gitconfig .conkyrc .Xmodmap .Xresources .devilspie bin
 ln -nfs ${SRC}/.bashrc
 ln -nfs ${SRC}/.bash_profile
 ln -nfs ${SRC}/.bash_logout
+ln -nfs ${SRC}/.gitconfig
 ln -nfs ${SRC}/.conkyrc
 ln -nfs ${SRC}/.Xmodmap
+ln -nfs ${SRC}/.Xresources
 ln -nfs ${SRC}/.devilspie
 ln -nfs ${SRC}/bin
 

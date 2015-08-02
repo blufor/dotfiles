@@ -10,5 +10,4 @@ dropbox start &
 conky -p 2 &
 devilspie -a &
 gnome-settings-daemon &
-# exec gpg-agent --daemon herbstluftwm
-exec herbstluftwm
+exec gpg-agent --daemon herbstluftwm

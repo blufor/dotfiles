@@ -12,4 +12,4 @@ X-GNOME-Bugzilla-Product=gnome-keyring
 X-GNOME-Bugzilla-Component=general
 X-GNOME-Bugzilla-Version=3.10.1
 X-Ubuntu-Gettext-Domain=gnome-keyring
-X-GNOME-Autostart-Enabled=false
+X-GNOME-Autostart-Enabled=true

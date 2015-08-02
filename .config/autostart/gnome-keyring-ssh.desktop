@@ -6,7 +6,7 @@ Exec=/usr/bin/gnome-keyring-daemon --start --components=ssh
 OnlyShowIn=GNOME;Unity;MATE;
 X-GNOME-Autostart-Phase=Initialization
 X-GNOME-AutoRestart=false
-X-GNOME-Autostart-Notify=true
+X-GNOME-Autostart-Notify=false
 X-GNOME-Bugzilla-Bugzilla=GNOME
 X-GNOME-Bugzilla-Product=gnome-keyring
 X-GNOME-Bugzilla-Component=general
