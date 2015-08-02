@@ -14,7 +14,7 @@ fi
 x=${geometry[0]}
 y=${geometry[1]}
 if [ $monitor == 0 ]; then
-  panel_width=280
+  panel_width=260
 else
   panel_width=${geometry[2]}
 fi

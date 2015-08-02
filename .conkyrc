@@ -9,7 +9,7 @@ own_window_argb_visual no
 own_window_argb_value 170
 draw_borders no
 gap_y 2
-gap_x 296
+gap_x 262
 alignment top_left
 update_interval 1.0
 default_color 666666
@@ -22,7 +22,7 @@ color6 CC9966
 use_xft yes
 xftfont Terminus:pixelsize=10
 use_spacer left
-minimum_size 2061 12
+minimum_size 2095 12
 draw_shades no
 pad_percents 2
 extra_newline no
