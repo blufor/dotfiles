@@ -1,0 +1,47 @@
+double_buffer yes
+background no
+own_window yes
+own_window_transparent no
+own_window_colour 101010
+own_window_type panel
+own_window_hints undecorate,sticky,skip_taskbar,skip_pager,below
+own_window_argb_visual no
+own_window_argb_value 170
+draw_borders no
+gap_y 2
+gap_x 296
+alignment top_left
+update_interval 1.0
+default_color 666666
+color1 ffffff
+color2 6699CC
+color3 66CC99
+color4 CC6666
+color5 66CCCC
+color6 CC9966
+use_xft yes
+xftfont Terminus:pixelsize=10
+use_spacer left
+minimum_size 2061 12
+draw_shades no
+pad_percents 2
+extra_newline no
+stippled_borders yes
+temperature_unit celsius
+default_bar_size 48 4
+border_inner_margin 1
+border_outer_margin 0
+
+TEXT
+${color1}| \
+${color5}${nodename} ${color1}| \
+${color2}T: ${color3}${time}${color2}/${color4}${utime %H:%M:%S}Z ${color1}| \
+${color6}${loadavg} ${color1}| \
+${color2}cpu: ${color}${cpubar cpu1} ${cpubar cpu2} ${cpubar cpu3} ${cpubar cpu4} ${color6}${cpu}% ${color1}| \
+${color2}mem: ${color}${membar} [${color4}${mem}${color}/${color3}${memeasyfree}${color}] ${color1}| \
+${color2}net: ${color3}${downspeed eth0}${color}/${color4}${upspeed eth0} ${color1}| \
+${color2}/:${color} ${fs_bar /} ${color4}${fs_used /}${color}/${color3}${fs_free /} ${color1}| \
+${color2}/storage:${color} ${fs_bar /storage} ${color4}${fs_used /storage}${color}/${color3}${fs_free /storage} ${color1}| \
+${color2}LKPR:${color6}${weather http://weather.noaa.gov/pub/data/observations/metar/stations/ LKPR temperature 15}dgC${color2}/${color6}${weather http://weather.noaa.gov/pub/data/observations/metar/stations/ LKPR humidity 15}%${color2}/${color6}${weather http://weather.noaa.gov/pub/data/observations/metar/stations/ LKPR wind_speed 15}kmph${color2}/${color6}${weather http://weather.noaa.gov/pub/data/observations/metar/stations/ LKPR wind_dir_DEG 15}dg ${color1}| \
+${color2}LKKB:${color6}${weather http://weather.noaa.gov/pub/data/observations/metar/stations/ LKKB temperature 15}dgC${color2}/${color6}${weather http://weather.noaa.gov/pub/data/observations/metar/stations/ LKKB humidity 15}%${color2}/${color6}${weather http://weather.noaa.gov/pub/data/observations/metar/stations/ LKKB wind_speed 15}kmph${color2}/${color6}${weather http://weather.noaa.gov/pub/data/observations/metar/stations/ LKKB wind_dir_DEG 15}dg ${color1}| \
+${color2}LKLN:${color6}${weather http://weather.noaa.gov/pub/data/observations/metar/stations/ LKLN temperature 15}dgC${color2}/${color6}${weather http://weather.noaa.gov/pub/data/observations/metar/stations/ LKLN humidity 15}%${color2}/${color6}${weather http://weather.noaa.gov/pub/data/observations/metar/stations/ LKLN wind_speed 15}kmph${color2}/${color6}${weather http://weather.noaa.gov/pub/data/observations/metar/stations/ LKLN wind_dir_DEG 15}dg ${color1}|

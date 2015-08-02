@@ -1,0 +1,12 @@
+( if
+( or
+( contains ( application_name ) "Sublime Text" )
+( contains ( application_name ) "Spotify" )
+( contains ( application_name ) "Todoist" )
+( contains ( window_class ) "Nautilus" )
+( contains ( window_class ) "Geary" )
+( contains ( window_class ) "Pidgin" )
+( contains ( window_class ) "Atom" )
+)
+( spawn_async (str "bash -c 'transset -i " (window_xid) " 0.9 >/dev/null'" ))
+)

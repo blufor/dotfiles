@@ -1,0 +1,4 @@
+( if
+( contains ( window_class ) "URxvt" )
+( spawn_async (str "bash -c 'transset -i " (window_xid) " 0.8 >/dev/null'" ))
+)
