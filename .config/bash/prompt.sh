@@ -84,7 +84,7 @@ prompt() {
   PS1="${TERM_NAME}"
   case ${PROMPT_STYLE} in
     letters)
-      PS1+="\n${BASECOLOR}${UIDBG}>${TXTRST} ${UIDCOLOR}\u${BASECOLOR}${HOSTCOLOR}@\h${BASECOLOR}:${PATHCOLOR}\w${TXTRST}${BASECOLOR}"
+      PS1+="${BASECOLOR}${UIDBG}>${TXTRST} ${UIDCOLOR}\u${BASECOLOR}${HOSTCOLOR}@\h${BASECOLOR}:${PATHCOLOR}\w${TXTRST}${BASECOLOR}"
       PS1+="\n${BASECOLOR}${UIDBG}>${TXTRST} "
       ;;
     blocks)
