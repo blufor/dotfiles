@@ -2,12 +2,12 @@ unset PS1
 
 PROMPT_LOADAVGFIELD="2"
 HORIZONTAL_DIVIDER="-"
-CORNER_TOP=`env printf '\u250C'`
-CORNER_BOTTOM=`env printf '\u2514'`
-VERTICAL_LINE=`env printf '\u2502'`
-HORIZONTAL_LINE=`env printf '\u2500'`
-LAMBDA=`env printf '\u03BB'`
-RADIOACTIVE=`env printf '\u2622'`
+CORNER_TOP=`perl -C -e 'print chr 0x250C'`
+CORNER_BOTTOM=`perl -C -e 'print chr 0x2514'`
+VERTICAL_LINE=`perl -C -e 'print chr 0x2502'`
+HORIZONTAL_LINE=`perl -C -e 'print chr 0x2500'`
+LAMBDA=`perl -C -e 'print chr 0x03BB'`
+RADIOACTIVE=`perl -C -e 'print chr 0x2622'`
 
 
 # color config
@@ -36,6 +36,12 @@ fi
 
 BASECOLOR=${UIDCOLOR}
 
+if [ "${OS}" == "Linux" ]; then
+  LOAD_THREADCNT=`egrep 'processor.+?\:' /proc/cpuinfo  | wc -l`
+elif [ "${OS}" == "Darwin" ]; then
+  LOAD_THREADCNT=`sysctl -n machdep.cpu.thread_count`
+fi
+
 prompt() {
   # last exitcode
   local CODE=${?}
@@ -57,18 +63,16 @@ prompt() {
   # loadavg info
   if [ "${OS}" == "Linux" ]; then
     local LOAD=`cut -d\  -f${PROMPT_LOADAVGFIELD} /proc/loadavg`
-    local threadcount=`egrep 'processor.+?\:' /proc/cpuinfo  | wc -l`
     local loadbase=`echo -n ${LOAD} | sed -u 's/\..*$//'`
 
   elif [ "${OS}" == "Darwin" ]; then
     local LOAD=`sysctl -n vm.loadavg | sed 's/[\{\}]//' | cut -d\  -f${PROMPT_LOADAVGFIELD}`
-    local threadcount=`sysctl -n machdep.cpu.thread_count`
     local loadbase=`echo -n ${LOAD} | sed 's/\..*$//'`
   fi
 
-  if [ "$loadbase" -gt "$threadcount" ]; then
+  if [ "$loadbase" -gt "$LOAD_THREADCNT" ]; then
     LOAD=${CRITCOLOR}${LOAD}${TXTRST}
-  elif [ "$loadbase" -gt "$(($threadcount/2))" ]; then
+  elif [ "$loadbase" -gt "$(($LOAD_THREADCNT/2))" ]; then
     LOAD=${WARNCOLOR}${LOAD}${TXTRST}
   else
     LOAD=${OKCOLOR}${LOAD}${TXTRST}
