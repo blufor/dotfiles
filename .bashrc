@@ -10,7 +10,11 @@ source ~/.config/bash/completion.sh
 source ~/.config/bash/aliases.sh
 source ~/.config/bash/prompt.sh
 
-[[ -n "${DISPLAY}" ]]               && source ~/.config/bash/workstation.sh
-[[ -s "${HOME}/.rvm/scripts/rvm" ]] && source ~/.rvm/scripts/rvm
 
+if [ -n "${DISPLAY}" ]; then
+  source ~/.config/bash/workstation.sh
+fi
 
+if [ -s "${HOME}/.rvm/scripts/rvm" ]; then
+  source ~/.rvm/scripts/rvm
+fi
