@@ -8,7 +8,7 @@ VERTICAL_LINE=`perl -CS -e 'print chr 0x2502'`
 HORIZONTAL_LINE=`perl -CS -e 'print chr 0x2500'`
 LAMBDA=`perl -CS -e 'print chr 0x03BB'`
 RADIOACTIVE=`perl -CS -e 'print chr 0x2622'`
-
+FQDN=$(hostname -f)
 
 # color config
 HOSTCOLOR=${UNDWHT}

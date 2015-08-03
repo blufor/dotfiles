@@ -15,5 +15,7 @@ alias la='ls -A'
 alias l='ls -CF'
 alias vi="vim"
 alias en="sudo -E bash -i"
-alias s="ssh"
+alias p="sudo PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin puppet agent -tv"
+alias s="sudo"
+alias se="sudoedit"
 alias apt="aptitude"

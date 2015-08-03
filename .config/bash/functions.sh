@@ -13,6 +13,10 @@ psg() {
     ps axu | grep $* | grep -v grep
 }
 
+rp() {
+  echo $* | sed -r s/\ /\\n/g | xargs -L1 -I{} ssh {} sudo PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin puppet agent -tv
+}
+
 bell() {
   if [ "$#" -gt "0" ]; then
     eval time $*
