@@ -1,11 +1,14 @@
 unset PS1
 
-# letters or blocks (block order is: loadvg, background jobs, exit code of last command)
-export PROMPT_STYLE="blocks"
-# field to take loadavg (field order is from /proc/loadavg, cut format field selection)
-export PROMPT_LOADAVGFIELD="2"
-# invisible character in the colored line (useful to draw something for copypasting)
-export PROMPT_SPACER="*"
+PROMPT_LOADAVGFIELD="2"
+HORIZONTAL_DIVIDER="-"
+CORNER_TOP=`env printf '\u250C'`
+CORNER_BOTTOM=`env printf '\u2514'`
+VERTICAL_LINE=`env printf '\u2502'`
+HORIZONTAL_LINE=`env printf '\u2500'`
+LAMBDA=`env printf '\u03BB'`
+RADIOACTIVE=`env printf '\u2622'`
+
 
 # color config
 HOSTCOLOR=${UNDWHT}
@@ -24,11 +27,11 @@ NONROOTBGCOLOR=${BAKBLU}
 if [ "$UID" -eq "0" ]; then
   UIDCOLOR=${ROOTCOLOR}
   UIDBG=${ROOTBGCOLOR}
-  UIDCHAR='#'
+  UIDCHAR=${LAMBDA}
 else
   UIDCOLOR=${NONROOTCOLOR}
   UIDBG=${NONROOTBGCOLOR}
-  UIDCHAR='$'
+  UIDCHAR=${LAMBDA}
 fi
 
 BASECOLOR=${UIDCOLOR}
@@ -52,12 +55,12 @@ prompt() {
   history -a
 
   # loadavg info
-  if [ "$(uname)" == "Linux" ]; then
+  if [ "${OS}" == "Linux" ]; then
     local LOAD=`cut -d\  -f${PROMPT_LOADAVGFIELD} /proc/loadavg`
     local threadcount=`egrep 'processor.+?\:' /proc/cpuinfo  | wc -l`
     local loadbase=`echo -n ${LOAD} | sed -u 's/\..*$//'`
 
-  elif [ "$(uname)" == "Darwin" ]; then
+  elif [ "${OS}" == "Darwin" ]; then
     local LOAD=`sysctl -n vm.loadavg | sed 's/[\{\}]//' | cut -d\  -f${PROMPT_LOADAVGFIELD}`
     local threadcount=`sysctl -n machdep.cpu.thread_count`
     local loadbase=`echo -n ${LOAD} | sed 's/\..*$//'`
@@ -71,21 +74,25 @@ prompt() {
     LOAD=${OKCOLOR}${LOAD}${TXTRST}
   fi
 
+  HR_BUF=`for i in $(seq 0 500); do echo -n ${HORIZONTAL_LINE}; done`
+  HR_LEN=${COLUMNS}-1
 
-  PS1="${TERM_NAME}\n"
-  PS1+="\n${UIDCOLOR}${UIDBG}${PROMPT_SPACER}${TXTRST}"
+  PS1="${TERM_NAME}"
   case ${PROMPT_STYLE} in
     letters)
-      PS1+="\n${UIDCOLOR}${UIDBG}${PROMPT_SPACER}${TXTRST} ${BASECOLOR}L:${LOAD}${BASECOLOR} E:${CODE}${TXTRST}"
+      PS1+="\n${BASECOLOR}${UIDBG}>${TXTRST} ${UIDCOLOR}\u${BASECOLOR}${HOSTCOLOR}@\h${BASECOLOR}:${PATHCOLOR}\w${TXTRST}${BASECOLOR}"
+      PS1+="\n${BASECOLOR}${UIDBG}>${TXTRST} "
       ;;
     blocks)
-      PS1+="\n${UIDCOLOR}${UIDBG}${PROMPT_SPACER}${TXTRST} ${LOAD} ${CODE}${TXTRST}"
+      PS1+="\n${BASECOLOR}${CORNER_TOP}${HR_BUF:0:${HR_LEN}}${TXTRST}"
+      PS1+="\n${BASECOLOR}${VERTICAL_LINE}${TXTRST} ${HOSTCOLOR}@\h${BASECOLOR}:${PATHCOLOR}\w${TXTRST}"
+      # PS1+="\n${BASECOLOR}${VERTICAL_LINE}${TXTRST} "
+      PS1+="\n${BASECOLOR}${VERTICAL_LINE}${TXTRST} ${LOAD} ${CODE}${TXTRST}"
+      PS1+="\n${BASECOLOR}${CORNER_BOTTOM} ${UIDCHAR}${TXTRST} "
       ;;
     *)
       ;;
   esac
-  PS1+="\n${UIDCOLOR}${UIDBG}${PROMPT_SPACER}${TXTRST} ${UIDCOLOR}\u${BASECOLOR} ${HOSTCOLOR}@\h${BASECOLOR} (${PATHCOLOR}\w${TXTRST}${BASECOLOR})"
-  PS1+="\n${UIDCOLOR}${UIDBG}${UIDCHAR}${TXTRST} "
 }
 
 case "$TERM" in

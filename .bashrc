@@ -1,14 +1,9 @@
 # ~/.bashrc
 
+export OS="`uname -s`"
+
 source ~/.config/bash/shopts.sh
 source ~/.config/bash/variables.sh
-
-case $- in
-    *i*) ;;
-      *) return;;
-esac
-
-export OS="`uname`"
 source ~/.config/bash/colors.sh
 source ~/.config/bash/functions.sh
 source ~/.config/bash/completion.sh
