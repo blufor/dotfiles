@@ -2,12 +2,12 @@ unset PS1
 
 PROMPT_LOADAVGFIELD="2"
 HORIZONTAL_DIVIDER="-"
-CORNER_TOP=`perl -C -e 'print chr 0x250C'`
-CORNER_BOTTOM=`perl -C -e 'print chr 0x2514'`
-VERTICAL_LINE=`perl -C -e 'print chr 0x2502'`
-HORIZONTAL_LINE=`perl -C -e 'print chr 0x2500'`
-LAMBDA=`perl -C -e 'print chr 0x03BB'`
-RADIOACTIVE=`perl -C -e 'print chr 0x2622'`
+CORNER_TOP=`perl -CS -e 'print chr 0x250C'`
+CORNER_BOTTOM=`perl -CS -e 'print chr 0x2514'`
+VERTICAL_LINE=`perl -CS -e 'print chr 0x2502'`
+HORIZONTAL_LINE=`perl -CS -e 'print chr 0x2500'`
+LAMBDA=`perl -CS -e 'print chr 0x03BB'`
+RADIOACTIVE=`perl -CS -e 'print chr 0x2622'`
 
 
 # color config
