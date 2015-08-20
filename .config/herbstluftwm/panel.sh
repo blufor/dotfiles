@@ -134,5 +134,5 @@ herbstclient pad $monitor $panel_height
         esac
     done
 } 2> /dev/null | dzen2 -w $panel_width -x $x -y $y -h $panel_height \
-    -ta l -bg "$bgcolor" -fg '#666666' -fn terminus-10 -title-name 'dzen_workspace_panel'
+    -ta l -bg "$bgcolor" -fg '#666666' -fn terminus-8 -title-name 'dzen_workspace_panel'
 

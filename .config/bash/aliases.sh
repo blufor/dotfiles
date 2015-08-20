@@ -19,3 +19,4 @@ alias p="sudo PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin 
 alias s="sudo"
 alias se="sudoedit"
 alias apt="aptitude"
+alias worksync="rsync -av --delete-before ./"
