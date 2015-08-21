@@ -1,0 +1,41 @@
+#!/bin/bash
+
+fail () {
+  echo -e "${BLDRED}!! > ${TXTRST}Failed!\n"
+}
+
+LINE="---"
+
+if [ -z $DEVDIR ]; then
+  echo "\$DEVDIR variable not defined"
+  exit 1
+fi
+
+if [ "${*}x" == "x" ]; then
+  # projects=$"`awk '/^[^#]/ { print $1 }' ${DEVDIR}/repos.conf | uniq`"
+  projects=`awk '/^[^#]/ { print $1 }' ${DEVDIR}/repos.conf | uniq`
+else
+  projects=${*}
+fi
+
+for project in ${projects}; do
+  mkdir -p ${DEVDIR}/${project}
+  sources=`egrep "^${project}" ${DEVDIR}/repos.conf | awk '/^[^#]/ { print $2 }'`
+
+  for source in ${sources}; do
+    dirname=`echo ${source} | awk -F: '{ print $2 }' | sed -r -e 's/.git$//' -e 's/.*+\///'`
+
+    printf "${BLDWHT}${LINE}> ${BLDGRN}${UNDGRN}${project}${TXTRST}${BLDWHT}/${TXTGRN}${dirname}${TXTRST}\n"
+    printf "   ${TXTYLW}> ${BLDYLW}${source} ${BLDWHT}-> ${TXTYLW}${DEVDIR}/${project}/${dirname}${TXTRST}\n"
+
+    if [ ! -d "${DEVDIR}/${project}/${dirname}" ]; then
+      git clone ${source} ${DEVDIR}/${project}/${dirname} 2>&1 | sed -re "s/^/   $(echo -e ${BLDBLU})> $(echo -e ${TXTBLU})/" -e "s/$/$(echo -e ${TXTRST})/" || fail
+    else
+      cd ${DEVDIR}/${project}/${dirname} && ( git pull 2>&1 | sed -re "s/^/   $(echo -e ${BLDBLU})> $(echo -e ${TXTBLU})/" -e "s/$/$(echo -e ${TXTRST})/" || fail )
+      cd ${OLDPWD}
+    fi
+
+    printf "${TXTGRN}   > ${BLDWHT}DONE${TXTRST}\n\n"
+  done
+
+done
