@@ -26,10 +26,8 @@ bell() {
     else
       color='\e[0;32m'
     fi
-    echo -e  "$color"
-    echo -e  "CMD:\t$*"
-    echo -en "CODE:\t$code"
-    echo -en '\e[0m'
+    echo -e "cmd\t$*"
+    echo -e "${color}code\t${code}\e[0m"
   fi
   tput bel
 }

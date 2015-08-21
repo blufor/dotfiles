@@ -22,6 +22,7 @@ inst ${SRC}/Xmodmap ${HOME}/.Xmodmap
 inst ${SRC}/Xresources ${HOME}/.Xresources
 inst ${SRC}/bash/ ${HOME}/.bash
 inst ${SRC}/bin/ ${HOME}/bin
+inst ${SRC}/devel/ ${HOME}/devel
 inst ${SRC}/devilspie/ ${HOME}/.devilspie
 inst ${SRC}/gnupg/ ${HOME}/.gnupg
 inst ${SRC}/ssh/ ${HOME}/.ssh
