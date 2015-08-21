@@ -2,6 +2,8 @@
 
 SRC=$PWD
 
+which rsync >/dev/null || exit 1
+
 inst () {
   rsync -aq $*
 }
